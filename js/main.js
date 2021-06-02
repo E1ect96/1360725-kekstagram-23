@@ -1,4 +1,4 @@
-const getRandomNumber = (minNumber, maxNumber) => {
+const getRandomNumber = function (minNumber, maxNumber) {
   if (minNumber >= 0 && maxNumber >= 0 && maxNumber < minNumber) {
     return Math.floor(Math.random() * (minNumber - maxNumber + 1) + maxNumber);
   }
@@ -7,4 +7,11 @@ const getRandomNumber = (minNumber, maxNumber) => {
   }
   throw new Error('Диапазон может быть только положительный, включая ноль');
 };
+
 getRandomNumber(10, 1);
+
+const checkMaxLength = function (string, maxLength) {
+  return ((string <= maxLength) ? true : false);
+};
+
+checkMaxLength(14, 140);
