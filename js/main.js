@@ -4,7 +4,7 @@ const getRandomNumber = function (firstNumber, secondNumber) {
     [firstNumber, secondNumber] = [secondNumber, firstNumber];
   }
   if (firstNumber >= 0 && secondNumber >= 0) {
-    return Math.floor(Math.random() * (firstNumber - firstNumber + 1) + firstNumber);
+    return Math.floor(Math.random() * (secondNumber - firstNumber + 1) + firstNumber);
   }
   throw new Error('Диапазон может быть только положительный, включая ноль');
 };
