@@ -1,12 +1,10 @@
 const getRandomNumber = function (firstNumber, secondNumber) {
-  let minNumber = firstNumber;
-  let maxNumber = secondNumber;
+
   if (secondNumber < firstNumber) {
-    minNumber = secondNumber;
-    maxNumber = firstNumber;
+    [firstNumber, secondNumber] = [secondNumber, firstNumber];
   }
   if (firstNumber >= 0 && secondNumber >= 0) {
-    return Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
+    return Math.floor(Math.random() * (firstNumber - firstNumber + 1) + firstNumber);
   }
   throw new Error('Диапазон может быть только положительный, включая ноль');
 };
