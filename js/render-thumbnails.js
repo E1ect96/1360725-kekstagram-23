@@ -1,6 +1,4 @@
-import {getPhotos} from'/js/data.js';
-
-const renderThumbnails = function (amount) {
+const renderThumbnails = function (data) {
   //то, куда будут добавляться фотографии
   const picturesBlock = document.querySelector('.pictures');
   //находим шаблон
@@ -8,7 +6,7 @@ const renderThumbnails = function (amount) {
   const newPictureTemplate = pictureTemplate.querySelector('.picture');
   const fragmentThumbnail = document.createDocumentFragment();
 
-  getPhotos(amount).forEach(({url, comments, likes}) => {
+  data.forEach(({url, comments, likes}) => {
     const picture = newPictureTemplate.cloneNode(true);
     picture.querySelector('.picture__img').src = url;
     picture.querySelector('.picture__comments').textContent = comments.length;
