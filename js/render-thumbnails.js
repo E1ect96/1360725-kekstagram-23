@@ -1,7 +1,5 @@
 const renderThumbnails = function (data) {
-  //то, куда будут добавляться фотографии
   const picturesBlock = document.querySelector('.pictures');
-  //находим шаблон
   const pictureTemplate = document.querySelector('#picture').content;
   const newPictureTemplate = pictureTemplate.querySelector('.picture');
   const fragmentThumbnail = document.createDocumentFragment();
