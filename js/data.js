@@ -1,4 +1,4 @@
-import {getRandomNumber, checkMaxLength} from'./utils.js';
+import {getRandomNumber} from'./utils.js';
 // Создание данных
 const sentences = [
   'Всё отлично!',
@@ -59,5 +59,3 @@ const getPhotos = (photosNumber) => {
 };
 
 export {getPhotos};
-
-checkMaxLength(14, 140);
