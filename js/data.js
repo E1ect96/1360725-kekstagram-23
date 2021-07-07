@@ -30,7 +30,6 @@ const getComments = (commentsNumber) => {
   const usedIds = [0];
   let randomId = 0;
   const comments = [];
-  // eslint-disable-next-line id-length
   for (let i = 1; i <= commentsNumber ; i++) {
     while (usedIds.includes(randomId, 0)) {
       randomId = getRandomNumber(1, 999);
@@ -46,14 +45,13 @@ const getComments = (commentsNumber) => {
 };
 const getPhotos = (photosNumber) => {
   const photos = [];
-  // eslint-disable-next-line id-length
   for (let i = 1; i <= photosNumber ; i++) {
     photos.push({
       id: i,
       url: `photos/${  i  }.jpg`,
       description: `Фотография с id:${  i}`,
       likes: getRandomNumber(15, 200),
-      comments: getComments(getRandomNumber(1, 5))});
+      comments: getComments(getRandomNumber(5, 125))});
   }
   return photos;
 };
