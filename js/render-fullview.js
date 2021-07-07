@@ -1,5 +1,5 @@
 import {popupOpen, popupClose, popup} from './popup.js';
-
+const ESC_KEYCODE = 27;
 const renderFullview = function (picturesData, photoId) {
   const currentPhoto = picturesData[photoId - 1];
   popup.querySelector('img').src = currentPhoto.url;
@@ -30,9 +30,8 @@ const renderFullview = function (picturesData, photoId) {
 
   commentsBlock.appendChild(commentsFragment);
 
-
   document.addEventListener('keydown', (evt) => {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === ESC_KEYCODE) {
       evt.preventDefault();
       popupClose();
     }

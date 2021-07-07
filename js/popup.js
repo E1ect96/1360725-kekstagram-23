@@ -13,6 +13,7 @@ const popupClose = function () {
   body.classList.remove('modal-open');
   popup.querySelector('.social__comment-count').classList.remove('hidden');
   popup.querySelector('.comments-loader').classList.remove('hidden');
+  document.removeEventListener('keydown');
 };
 
 export {popupOpen, popupClose, popup};
