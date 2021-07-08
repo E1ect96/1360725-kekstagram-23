@@ -1,5 +1,16 @@
 import {popupOpen, popupClose, popup} from './popup.js';
-const ESC_KEYCODE = 27;
+import {isEscEvent} from './utils.js';
+
+const closeButton = popup.querySelector('#picture-cancel');
+
+
+const onEscPress = function (evt) {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    popupClose();
+  }
+};
+
 const renderFullview = function (picturesData, photoId) {
   const currentPhoto = picturesData[photoId - 1];
   popup.querySelector('img').src = currentPhoto.url;
@@ -30,17 +41,9 @@ const renderFullview = function (picturesData, photoId) {
 
   commentsBlock.appendChild(commentsFragment);
 
-  document.addEventListener('keydown', (evt) => {
-    if (evt.keyCode === ESC_KEYCODE) {
-      evt.preventDefault();
-      popupClose();
-    }
-  });
+  document.addEventListener('keydown', onEscPress);
   popupOpen();
-  const closeButton = popup.querySelector('#picture-cancel');
-  closeButton.addEventListener('click', ()=> {
-    popupClose();
-  });
+  closeButton.addEventListener('click', popupClose);
 };
 
-export {renderFullview};
+export {renderFullview, closeButton, onEscPress};
