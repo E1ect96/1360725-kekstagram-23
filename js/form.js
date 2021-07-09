@@ -49,11 +49,13 @@ const validateHashtags = function () {
     if (!(re.test(element))) {
       errors.push('хэш-тег должен начинаться с символа # (решётка), состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., и не может превышать длину 20 символов');
     }
-    // element = element.toLowerCase();
     if (!(validHashtags.includes(element.toLowerCase()))) {
       validHashtags.push(element);
     } else {
       errors.push('хеш-теги не должны повторяться');
+    }
+    if (validHashtags.length > 5){
+      errors.push('максимальное количество хеш-тегов - 5');
     }
     textHashtags.setCustomValidity(errors.join('. \n'));
   });
