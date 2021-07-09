@@ -19,6 +19,7 @@ const closeUploadForm = function () {
   body.classList.remove('modal-open');
   resetInputValue();
   closeButton.removeEventListener('click', closeUploadForm);
+  // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', onEscPress);
 };
 
@@ -37,3 +38,25 @@ const openUploadForm = function () {
 };
 
 uploadInput.addEventListener('change', openUploadForm);
+
+const validateHashtags = function () {
+  const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
+  const enteredHashtags = textHashtags.value.split(' ');
+  const validHashtags = [];
+  const errors = [];
+
+  enteredHashtags.forEach((element) => {
+    if (!(re.test(element))) {
+      errors.push('хэш-тег должен начинаться с символа # (решётка), состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., и не может превышать длину 20 символов');
+    }
+    // element = element.toLowerCase();
+    if (!(validHashtags.includes(element.toLowerCase()))) {
+      validHashtags.push(element);
+    } else {
+      errors.push('хеш-теги не должны повторяться');
+    }
+    textHashtags.setCustomValidity(errors.join('. \n'));
+  });
+};
+
+textHashtags.addEventListener('input', validateHashtags);
