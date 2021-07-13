@@ -24,7 +24,7 @@ const closeUploadForm = function () {
 };
 
 const onEscPress = function (evt) {
-  if (isEscEvent(evt)) {
+  if (isEscEvent(evt) && !(document.activeElement === textHashtags || document.activeElement === textDescription)) {
     evt.preventDefault();
     closeUploadForm();
   }
