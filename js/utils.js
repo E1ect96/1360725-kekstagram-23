@@ -19,8 +19,8 @@ const checkMaxLength = function (string, maxLength) {
 
 checkMaxLength(14, 140);
 
-const isEscEvent = (evt) => {
-  evt.key === 'Escape' || evt.key === 'Esc;';
+const isEscEvent = function (evt){
+  return (evt.key === 'Escape' || evt.key === 'Esc');
 };
 
 export {getRandomNumber, checkMaxLength, isEscEvent};
