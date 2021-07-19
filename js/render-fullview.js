@@ -54,12 +54,15 @@ const renderFullview = function (picturesData, photoId) {
       /*console.log(START_INDEX);
       console.log(COMMENTS_COUNT);*/
     }
+    popup.addEventListener('close', () => {
+      comentsLoader.removeEventListener('click', showMoreComments);
+    });
   };
   showMoreComments();
   comentsLoader.addEventListener('click', showMoreComments);
   document.addEventListener('keydown', onEscPress);
   popupOpen();
   closeButton.addEventListener('click', popupClose);
-};
 
+};
 export {renderFullview, closeButton, onEscPress, comentsLoader};
