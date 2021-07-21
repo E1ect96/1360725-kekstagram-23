@@ -10,10 +10,33 @@ const closeButton = photoUpload.querySelector('.img-upload__cancel');
 const textHashtags = photoUpload.querySelector('.text__hashtags');
 const textDescription = photoUpload.querySelector('.text__description');
 
+const scaleDownControl = photoUpload.querySelector('.scale__control--smaller');
+const scaleUpControl = photoUpload.querySelector('.scale__control--bigger');
+const scaleControlValue = photoUpload.querySelector('.scale__control--value');
+const imgUploadPreview = photoUpload.querySelector('.img-upload__preview').children[0];
+
+let scaleValue = 100;
+
 const resetInputValue = function () {
   uploadInput.value = '';
   textHashtags.value = '';
   textDescription.value = '';
+};
+
+const scaleDownControlHandler = function () {
+  if (scaleControlValue.value > 25) {
+    scaleControlValue.value = parseInt(scaleControlValue.value,10) - 25;
+    scaleValue = scaleControlValue.value / 100;
+    imgUploadPreview.style.transform = `scale(${scaleValue})`;
+  }
+};
+
+const scaleUpControlHandler = function () {
+  if (scaleControlValue.value < 100) {
+    scaleControlValue.value = parseInt(scaleControlValue.value,10) + 25;
+    scaleValue = scaleControlValue.value / 100;
+    imgUploadPreview.style.transform = `scale(${scaleValue})`;
+  }
 };
 
 const uploadFormCloseHandler = function () {
@@ -35,6 +58,13 @@ const onEscPress = function (evt) {
 const uploadFormOpenHandler = function () {
   uploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
+
+  scaleControlValue.value = 100;
+  scaleValue = 1;
+  imgUploadPreview.style.transform = `scale(${scaleValue})`;
+  scaleDownControl.addEventListener('click', scaleDownControlHandler);
+  scaleUpControl.addEventListener('click', scaleUpControlHandler);
+
   closeButton.addEventListener('click', uploadFormCloseHandler);
   document.addEventListener('keydown', onEscPress);
 };
