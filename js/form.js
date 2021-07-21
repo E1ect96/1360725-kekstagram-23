@@ -1,5 +1,7 @@
 import {isEscEvent} from './utils.js';
 
+const MAX_HASHTAGS_COUNT = 5;
+
 const photoUpload = document.querySelector('.img-upload__form');
 const uploadInput = photoUpload.querySelector('#upload-file');
 const uploadForm = photoUpload.querySelector('.img-upload__overlay');
@@ -14,11 +16,11 @@ const resetInputValue = function () {
   textDescription.value = '';
 };
 
-const closeUploadForm = function () {
+const uploadFormCloseHandler = function () {
   uploadForm.classList.add('hidden');
   body.classList.remove('modal-open');
   resetInputValue();
-  closeButton.removeEventListener('click', closeUploadForm);
+  closeButton.removeEventListener('click', uploadFormCloseHandler);
   // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', onEscPress);
 };
@@ -26,20 +28,20 @@ const closeUploadForm = function () {
 const onEscPress = function (evt) {
   if (isEscEvent(evt) && !(document.activeElement === textHashtags || document.activeElement === textDescription)) {
     evt.preventDefault();
-    closeUploadForm();
+    uploadFormCloseHandler();
   }
 };
 
-const openUploadForm = function () {
+const uploadFormOpenHandler = function () {
   uploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
-  closeButton.addEventListener('click', closeUploadForm);
+  closeButton.addEventListener('click', uploadFormCloseHandler);
   document.addEventListener('keydown', onEscPress);
 };
 
-uploadInput.addEventListener('change', openUploadForm);
+uploadInput.addEventListener('change', uploadFormOpenHandler);
 
-const validateHashtags = function () {
+const hashtagsValidateHandler = function () {
   const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
   const enteredHashtags = textHashtags.value.split(' ');
   const validHashtags = [];
@@ -54,11 +56,11 @@ const validateHashtags = function () {
     } else {
       errors.push('хеш-теги не должны повторяться');
     }
-    if (validHashtags.length > 5){
+    if (validHashtags.length > MAX_HASHTAGS_COUNT){
       errors.push('максимальное количество хеш-тегов - 5');
     }
     textHashtags.setCustomValidity(errors.join('. \n'));
   });
 };
 
-textHashtags.addEventListener('input', validateHashtags);
+textHashtags.addEventListener('input', hashtagsValidateHandler);
