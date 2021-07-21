@@ -1,6 +1,7 @@
 import {renderThumbnails} from './render-thumbnails.js';
 import {getPhotos} from './data.js';
 import './form.js';
+import './applying-filters.js';
 
 const NUMBER_OF_PHOTOS = 25;
 const demoData = getPhotos(NUMBER_OF_PHOTOS);

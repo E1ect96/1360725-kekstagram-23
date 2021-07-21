@@ -94,3 +94,5 @@ const hashtagsValidateHandler = function () {
 };
 
 textHashtags.addEventListener('input', hashtagsValidateHandler);
+
+export {photoUpload};
