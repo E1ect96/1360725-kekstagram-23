@@ -25,8 +25,6 @@ const resetEffect = function () {
   effectLevel.classList.add('hidden');
 };
 
-resetEffect();
-
 effects.addEventListener('click', (evt) => {
   effect = evt.target.value;
   effectLevel.classList.remove('hidden');
@@ -61,6 +59,51 @@ effects.addEventListener('click', (evt) => {
         effectLevelValue.value = unencoded[handle];
         imgUploadPreview.style.filter = `sepia(${effectLevelValue.value})`;
       });
+      break;
+    case 'marvin':
+      effectLevelSlider.noUiSlider.updateOptions ({
+        range: {
+          'min': 0,
+          'max': 100,
+        },
+        step: 1,
+        start: 100,
+      });
+      effectLevelSlider.noUiSlider.on('update',(__,handle,unencoded) => {
+        effectLevelValue.value = unencoded[handle];
+        imgUploadPreview.style.filter = `invert(${effectLevelValue.value}%)`;
+      });
+      break;
+    case 'phobos':
+      effectLevelSlider.noUiSlider.updateOptions ({
+        range: {
+          'min': 0,
+          'max': 3,
+        },
+        step: 0.1,
+        start: 3,
+      });
+      effectLevelSlider.noUiSlider.on('update',(__,handle,unencoded) => {
+        effectLevelValue.value = unencoded[handle];
+        imgUploadPreview.style.filter = `blur(${effectLevelValue.value}px)`;
+      });
+      break;
+    case 'heat':
+      effectLevelSlider.noUiSlider.updateOptions ({
+        range: {
+          'min': 1,
+          'max': 3,
+        },
+        step: 0.1,
+        start: 3,
+      });
+      effectLevelSlider.noUiSlider.on('update',(__,handle,unencoded) => {
+        effectLevelValue.value = unencoded[handle];
+        imgUploadPreview.style.filter = `brightness(${effectLevelValue.value})`;
+      });
+      break;
+    case 'none':
+      resetEffect();
       break;
   }
 });
