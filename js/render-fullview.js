@@ -19,18 +19,18 @@ const renderFullview = function (picturesData, photoId) {
   popup.querySelector('.social__caption').textContent = currentPhoto.description;
   popup.querySelector('.likes-count').textContent = currentPhoto.likes;
 
-  let COMMENTS_COUNT = 5;
-  let START_INDEX = 0;
+  let commentsCount = 5;
+  let startIndex = 0;
   const commentsBlock = popup.querySelector('.social__comments');
   commentsBlock.textContent = '';
   const commentsFragment = new DocumentFragment();
 
   const showMoreComments = function () {
-    if (currentPhoto.comments.length - COMMENTS_COUNT < 0) {
-      COMMENTS_COUNT = currentPhoto.comments.length;
+    if (currentPhoto.comments.length - commentsCount < 0) {
+      commentsCount = currentPhoto.comments.length;
     }
-    if (COMMENTS_COUNT <= currentPhoto.comments.length) {
-      for (let i = START_INDEX; i < COMMENTS_COUNT; i++) {
+    if (commentsCount <= currentPhoto.comments.length) {
+      for (let i = startIndex; i < commentsCount; i++) {
         const commentItem = document.createElement('li');
         commentItem.classList.add('social__comment');
         const commentAvatar = document.createElement('img');
@@ -47,12 +47,10 @@ const renderFullview = function (picturesData, photoId) {
         commentItem.appendChild(commentText);
         commentsFragment.appendChild(commentItem);
         commentsBlock.appendChild(commentsFragment);
-        comentsCounter.textContent = `${COMMENTS_COUNT  } из ${  currentPhoto.comments.length  } комментариев`;
+        comentsCounter.textContent = `${commentsCount  } из ${  currentPhoto.comments.length  } комментариев`;
       }
-      START_INDEX += 5;
-      COMMENTS_COUNT += 5;
-      /*console.log(START_INDEX);
-      console.log(COMMENTS_COUNT);*/
+      startIndex += 5;
+      commentsCount += 5;
     }
     popup.addEventListener('close', () => {
       comentsLoader.removeEventListener('click', showMoreComments);
