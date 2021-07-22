@@ -26,8 +26,9 @@ const renderFullview = function (picturesData, photoId) {
   const commentsFragment = new DocumentFragment();
 
   const showMoreComments = function () {
-    if (currentPhoto.comments.length - commentsCount < 0) {
+    if (currentPhoto.comments.length - commentsCount <= 0) {
       commentsCount = currentPhoto.comments.length;
+      comentsLoader.classList.add('hidden');
     }
     if (commentsCount <= currentPhoto.comments.length) {
       for (let i = startIndex; i < commentsCount; i++) {
