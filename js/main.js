@@ -6,3 +6,5 @@ import './applying-filters.js';
 const URL = 'https://23.javascript.pages.academy/kekstagram';
 
 getData(URL, renderThumbnails, showRenderError);
+
+export {URL};

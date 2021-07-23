@@ -10,7 +10,7 @@ const getData = function (URL, onSuccess, onError) {
 };
 
 const sendData = function (URL, onSuccess, onError, data) {
-  fetch(URL,
+  fetch( URL,
     {
       method: 'POST',
       body: data,
