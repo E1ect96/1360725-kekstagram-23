@@ -1,8 +1,11 @@
 import {renderThumbnails} from './render-thumbnails.js';
-import {getPhotos} from './data.js';
+import { getData } from './api.js';
 import './form.js';
 import './applying-filters.js';
 
-const NUMBER_OF_PHOTOS = 25;
-const demoData = getPhotos(NUMBER_OF_PHOTOS);
-renderThumbnails(demoData);
+const showRenderError = function () {
+  alert('Ошибка');
+};
+
+const URL = 'https://23.javascript.pages.academy/kekstagram';
+getData(URL, renderThumbnails, showRenderError);
