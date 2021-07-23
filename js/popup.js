@@ -21,4 +21,4 @@ const popupClose = function () {
   resetEffect();
 };
 
-export {popupOpen, popupClose, popup};
+export {popupOpen, popupClose, popup, body};
