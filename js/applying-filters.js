@@ -23,6 +23,7 @@ const resetEffect = function () {
   imgUploadPreview.style.removeProperty('filter');
   imgUploadPreview.removeAttribute('class');
   effectLevel.classList.add('hidden');
+  effect = 'none';
 };
 
 effects.addEventListener('click', (evt) => {
@@ -108,4 +109,5 @@ effects.addEventListener('click', (evt) => {
   }
 });
 
+export {resetEffect};
 

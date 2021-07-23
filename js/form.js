@@ -1,4 +1,9 @@
 import {isEscEvent} from './utils.js';
+import {resetEffect} from './applying-filters.js';
+import {sendData} from './api.js';
+import {URL} from './main.js';
+import {formUploadSuccess} from './form-upload-success.js';
+import {formUploadError} from './form-upload-error.js';
 
 const MAX_HASHTAGS_COUNT = 5;
 
@@ -39,13 +44,28 @@ const scaleUpControlHandler = function () {
   }
 };
 
-const uploadFormCloseHandler = function () {
+const formClose = function () {
   uploadForm.classList.add('hidden');
   body.classList.remove('modal-open');
   resetInputValue();
+  resetEffect();
+  // eslint-disable-next-line no-use-before-define
+  photoUpload.removeEventListener('submit', photoUploadSubmitHandler);
+  // eslint-disable-next-line no-use-before-define
   closeButton.removeEventListener('click', uploadFormCloseHandler);
   // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', onEscPress);
+};
+
+const photoUploadSubmitHandler = function (evt) {
+  evt.preventDefault();
+  const formData = new FormData(evt.target);
+  formClose();
+  sendData(URL, formUploadSuccess, formUploadError, formData);
+};
+
+const uploadFormCloseHandler = function () {
+  formClose();
 };
 
 const onEscPress = function (evt) {
@@ -64,7 +84,7 @@ const uploadFormOpenHandler = function () {
   imgUploadPreview.style.transform = `scale(${scaleValue})`;
   scaleDownControl.addEventListener('click', scaleDownControlHandler);
   scaleUpControl.addEventListener('click', scaleUpControlHandler);
-
+  photoUpload.addEventListener('submit', photoUploadSubmitHandler);
   closeButton.addEventListener('click', uploadFormCloseHandler);
   document.addEventListener('keydown', onEscPress);
 };

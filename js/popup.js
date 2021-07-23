@@ -1,4 +1,6 @@
 import {closeButton, onEscPress} from './render-fullview.js';
+import {resetEffect} from './applying-filters.js';
+
 const popup = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const close = new Event('close');
@@ -16,6 +18,7 @@ const popupClose = function () {
   popup.querySelector('.social__comment-count').classList.remove('hidden');
   popup.querySelector('.comments-loader').classList.remove('hidden');
   popup.dispatchEvent(close);
+  resetEffect();
 };
 
-export {popupOpen, popupClose, popup};
+export {popupOpen, popupClose, popup, body};
