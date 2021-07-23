@@ -1,4 +1,5 @@
 import {isEscEvent} from './utils.js';
+import {resetEffect} from './applying-filters.js';
 
 const MAX_HASHTAGS_COUNT = 5;
 
@@ -43,6 +44,7 @@ const uploadFormCloseHandler = function () {
   uploadForm.classList.add('hidden');
   body.classList.remove('modal-open');
   resetInputValue();
+  resetEffect();
   closeButton.removeEventListener('click', uploadFormCloseHandler);
   // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', onEscPress);
