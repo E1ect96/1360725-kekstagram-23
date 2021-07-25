@@ -1,4 +1,6 @@
-const getData = function (URL, onSuccess, onError) {
+const URL = 'https://23.javascript.pages.academy/kekstagram';
+
+const getData = function (onSuccess, onError) {
   fetch(`${URL  }/data`)
     .then((response) => response.json())
     .then((data) => {
@@ -9,7 +11,7 @@ const getData = function (URL, onSuccess, onError) {
     });
 };
 
-const sendData = function (URL, onSuccess, onError, data) {
+const sendData = function (onSuccess, onError, data) {
   fetch( URL,
     {
       method: 'POST',

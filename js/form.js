@@ -1,7 +1,6 @@
 import {isEscEvent} from './utils.js';
 import {resetEffect} from './applying-filters.js';
 import {sendData} from './api.js';
-import {URL} from './main.js';
 import {formUploadSuccess} from './form-upload-success.js';
 import {formUploadError} from './form-upload-error.js';
 
@@ -61,7 +60,7 @@ const photoUploadSubmitHandler = function (evt) {
   evt.preventDefault();
   const formData = new FormData(evt.target);
   formClose();
-  sendData(URL, formUploadSuccess, formUploadError, formData);
+  sendData(formUploadSuccess, formUploadError, formData);
 };
 
 const uploadFormCloseHandler = function () {
