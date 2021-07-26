@@ -4,7 +4,11 @@ const renderThumbnails = function (picturesData) {
   const picturesBlock = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture').content;
   const newPictureTemplate = pictureTemplate.querySelector('.picture');
+  const filterMenu = document.querySelector('.img-filters');
   const fragmentThumbnail = document.createDocumentFragment();
+  const allImages = picturesBlock.querySelectorAll('a');
+
+  allImages.forEach((image) => image.remove());
 
   picturesData.forEach(({url, comments, likes, id}) => {
     const picture = newPictureTemplate.cloneNode(true);
@@ -17,6 +21,7 @@ const renderThumbnails = function (picturesData) {
     fragmentThumbnail.appendChild(picture);
   });
   picturesBlock.appendChild(fragmentThumbnail);
+  filterMenu.classList.remove('img-filters--inactive');
 };
 export {renderThumbnails};
 

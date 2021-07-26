@@ -1,13 +1,15 @@
+import {showRenderError} from './show-render-error.js';
+
 const URL = 'https://23.javascript.pages.academy/kekstagram';
 
-const getData = function (onSuccess, onError) {
-  fetch(`${URL  }/data`)
+const getData = function (onSuccess) {
+  fetch(`${URL}/data`)
     .then((response) => response.json())
     .then((data) => {
       onSuccess(data);
     })
     .catch(() => {
-      onError();
+      showRenderError();
     });
 };
 

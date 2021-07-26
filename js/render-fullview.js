@@ -14,7 +14,7 @@ const onEscPress = function (evt) {
 };
 
 const renderFullview = function (picturesData, photoId) {
-  const currentPhoto = picturesData[photoId - 1];
+  const currentPhoto = picturesData[photoId];
   popup.querySelector('img').src = currentPhoto.url;
   popup.querySelector('.social__caption').textContent = currentPhoto.description;
   popup.querySelector('.likes-count').textContent = currentPhoto.likes;
@@ -54,11 +54,14 @@ const renderFullview = function (picturesData, photoId) {
       commentsCount += 5;
     }
     popup.addEventListener('close', () => {
-      comentsLoader.removeEventListener('click', showMoreComments);
+      comentsLoader.removeEventListener('click', commentsLoaderClickHandler);
     });
   };
   showMoreComments();
-  comentsLoader.addEventListener('click', showMoreComments);
+  const commentsLoaderClickHandler = function () {
+    showMoreComments();
+  };
+  comentsLoader.addEventListener('click', commentsLoaderClickHandler);
   document.addEventListener('keydown', onEscPress);
   popupOpen();
   closeButton.addEventListener('click', popupClose);
