@@ -41,7 +41,7 @@ const getUniqImages = (images) => {
   return results;
 };
 
-export const getRandomImages = (array) => {
+export const getRandomImages = function (array) {
   const results = [];
 
   for (let count = 0; count < array.length; count++) {
@@ -55,6 +55,8 @@ export const getRandomImages = (array) => {
   return getUniqImages(results).slice(0, RANDOM_IMAGES_COUNT);
 };
 
-export const getSortedImages = (images) => images.slice().sort((first, second) => second.comments.length - first.comments.length);
+export const getSortedImages = function (images) {
+  images.slice().sort((first, second) => second.comments.length - first.comments.length);
+};
 
 export {getRandomNumber, checkMaxLength, isEscEvent};
