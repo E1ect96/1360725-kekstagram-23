@@ -13,8 +13,8 @@ const onEscPress = function (evt) {
   }
 };
 
-const renderFullview = function (picturesData, photoId) {
-  const currentPhoto = picturesData[photoId];
+const renderFullview = function (pictureData) {
+  const currentPhoto = pictureData;
   popup.querySelector('img').src = currentPhoto.url;
   popup.querySelector('.social__caption').textContent = currentPhoto.description;
   popup.querySelector('.likes-count').textContent = currentPhoto.likes;
@@ -53,7 +53,8 @@ const renderFullview = function (picturesData, photoId) {
       startIndex += 5;
       commentsCount += 5;
     }
-    popup.addEventListener('close', () => {
+    popup.addEventListener('close',  () => {
+      // eslint-disable-next-line no-use-before-define
       comentsLoader.removeEventListener('click', commentsLoaderClickHandler);
     });
   };

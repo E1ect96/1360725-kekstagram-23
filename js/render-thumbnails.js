@@ -10,13 +10,15 @@ const renderThumbnails = function (picturesData) {
 
   allImages.forEach((image) => image.remove());
 
-  picturesData.forEach(({url, comments, likes, id}) => {
+  picturesData.forEach((pictureData) => {
+    const {url, comments, likes, id} = pictureData;
     const picture = newPictureTemplate.cloneNode(true);
     picture.querySelector('.picture__img').src = url;
     picture.querySelector('.picture__comments').textContent = comments.length;
     picture.querySelector('.picture__likes').textContent = likes;
+    picture.dataset.id = id;
     picture.addEventListener('click', () => {
-      renderFullview(picturesData, id);
+      renderFullview(pictureData);
     });
     fragmentThumbnail.appendChild(picture);
   });

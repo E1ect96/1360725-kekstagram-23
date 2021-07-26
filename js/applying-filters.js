@@ -6,6 +6,7 @@ const effectLevel = photoUpload.querySelector('.effect-level');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effects = document.querySelector('.effects__list');
+const effectNone = document.querySelector('#effect-none');
 
 noUiSlider.create(effectLevelSlider, {
   start: 100,
@@ -24,6 +25,7 @@ const resetEffect = function () {
   imgUploadPreview.removeAttribute('class');
   effectLevel.classList.add('hidden');
   effect = 'none';
+  effectNone.checked = true;
 };
 
 effects.addEventListener('click', (evt) => {

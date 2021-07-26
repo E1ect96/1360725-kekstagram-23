@@ -29,7 +29,7 @@ const resetInputValue = function () {
 
 const scaleDownControlHandler = function () {
   if (scaleControlValue.value > 25) {
-    scaleControlValue.value = parseInt(scaleControlValue.value,10) - 25;
+    scaleControlValue.value = parseInt(scaleControlValue.value, 10) - 25;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
@@ -37,7 +37,7 @@ const scaleDownControlHandler = function () {
 
 const scaleUpControlHandler = function () {
   if (scaleControlValue.value < 100) {
-    scaleControlValue.value = parseInt(scaleControlValue.value,10) + 25;
+    scaleControlValue.value = parseInt(scaleControlValue.value, 10) + 25;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
@@ -96,20 +96,25 @@ const hashtagsValidateHandler = function () {
   const validHashtags = [];
   const errors = [];
 
-  enteredHashtags.forEach((element) => {
-    if (!(re.test(element))) {
-      errors.push('хэш-тег должен начинаться с символа # (решётка), состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., и не может превышать длину 20 символов');
-    }
-    if (!(validHashtags.includes(element.toLowerCase()))) {
-      validHashtags.push(element);
-    } else {
-      errors.push('хеш-теги не должны повторяться');
-    }
-    if (validHashtags.length > MAX_HASHTAGS_COUNT){
-      errors.push('максимальное количество хеш-тегов - 5');
-    }
-    textHashtags.setCustomValidity(errors.join('. \n'));
-  });
+  if (enteredHashtags[0]) {
+    enteredHashtags.forEach((element) => {
+      if (!(re.test(element))) {
+        errors.push('хэш-тег должен начинаться с символа # (решётка), состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., и не может превышать длину 20 символов');
+      }
+      if (!(validHashtags.includes(element.toLowerCase()))) {
+        validHashtags.push(element);
+      } else {
+        errors.push('хеш-теги не должны повторяться');
+      }
+      if (validHashtags.length > MAX_HASHTAGS_COUNT){
+        errors.push('максимальное количество хеш-тегов - 5');
+      }
+      textHashtags.setCustomValidity(errors.join('. \n'));
+    });
+  } else  {
+    textHashtags.setCustomValidity('');
+  }
+  textHashtags.reportValidity();
 };
 
 textHashtags.addEventListener('input', hashtagsValidateHandler);
