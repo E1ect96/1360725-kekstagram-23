@@ -54,7 +54,7 @@ const formClose = function () {
   // eslint-disable-next-line no-use-before-define
   closeButton.removeEventListener('click', uploadFormCloseHandler);
   // eslint-disable-next-line no-use-before-define
-  document.removeEventListener('keydown', EscPressHandler);
+  document.removeEventListener('keydown', escPressHandler);
 };
 
 const photoUploadSubmitHandler = function (evt) {
@@ -68,7 +68,7 @@ const uploadFormCloseHandler = function () {
   formClose();
 };
 
-const EscPressHandler = function (evt) {
+const escPressHandler = function (evt) {
   if (isEscEvent(evt) && !(document.activeElement === textHashtags || document.activeElement === textDescription)) {
     evt.preventDefault();
     uploadFormCloseHandler();
@@ -100,7 +100,7 @@ const uploadFormOpenHandler = function () {
   scaleUpControl.addEventListener('click', scaleUpControlHandler);
   photoUpload.addEventListener('submit', photoUploadSubmitHandler);
   closeButton.addEventListener('click', uploadFormCloseHandler);
-  document.addEventListener('keydown', EscPressHandler);
+  document.addEventListener('keydown', escPressHandler);
 };
 
 uploadInput.addEventListener('change', uploadFormOpenHandler);

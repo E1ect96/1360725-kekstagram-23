@@ -6,7 +6,7 @@ const comentsCounter = popup.querySelector('.social__comment-count');
 const comentsLoader = popup.querySelector('.comments-loader');
 
 
-const EscPressHandler = function (evt) {
+const escPressHandler = function (evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     popupClose();
@@ -63,7 +63,7 @@ const renderFullview = function (pictureData) {
     showMoreComments();
   };
   comentsLoader.addEventListener('click', commentsLoaderClickHandler);
-  document.addEventListener('keydown', EscPressHandler);
+  document.addEventListener('keydown', escPressHandler);
   popupOpen();
   const closeButtonClickHandler = function () {
     popupClose();
@@ -71,4 +71,4 @@ const renderFullview = function (pictureData) {
   closeButton.addEventListener('click', closeButtonClickHandler);
 
 };
-export {renderFullview, closeButton, EscPressHandler, comentsLoader};
+export {renderFullview, closeButton, escPressHandler, comentsLoader};

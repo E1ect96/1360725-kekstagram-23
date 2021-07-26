@@ -56,7 +56,7 @@ export const getRandomImages = function (array) {
 };
 
 export const getSortedImages = function (images) {
-  images.slice().sort((first, second) => second.comments.length - first.comments.length);
+  return images.slice().sort((first, second) => second.comments.length - first.comments.length);
 };
 
 export {getRandomNumber, checkMaxLength, isEscEvent};
