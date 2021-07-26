@@ -5,6 +5,7 @@ import {formUploadSuccess} from './form-upload-success.js';
 import {formUploadError} from './form-upload-error.js';
 
 const MAX_HASHTAGS_COUNT = 5;
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const photoUpload = document.querySelector('.img-upload__form');
 const uploadInput = photoUpload.querySelector('#upload-file');
@@ -78,6 +79,20 @@ const uploadFormOpenHandler = function () {
   uploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
 
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      imgUploadPreview.src = reader.result;
+    });
+    reader.readAsDataURL(file);
+  } else {
+    formUploadError();
+  }
   scaleControlValue.value = 100;
   scaleValue = 1;
   imgUploadPreview.style.transform = `scale(${scaleValue})`;
@@ -119,4 +134,4 @@ const hashtagsValidateHandler = function () {
 
 textHashtags.addEventListener('input', hashtagsValidateHandler);
 
-export {photoUpload};
+export {photoUpload, uploadInput};
