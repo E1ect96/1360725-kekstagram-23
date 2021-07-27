@@ -1,9 +1,15 @@
-import {popupOpen, popupClose, popup} from './popup.js';
+import {popupOpen, popupClose} from './popup.js';
 import {isEscEvent} from './utils.js';
 
+const COMMENTS_COUNT_INIT = 5;
+const IMAGE_SIDE_SIZE = 35;
+const popup = document.querySelector('.big-picture');
 const closeButton = popup.querySelector('#picture-cancel');
-const comentsCounter = popup.querySelector('.social__comment-count');
-const comentsLoader = popup.querySelector('.comments-loader');
+const commentsCounter = popup.querySelector('.social__comment-count');
+const commentsLoader = popup.querySelector('.comments-loader');
+const popupImg = popup.querySelector('img');
+const popupCaption = popup.querySelector('.social__caption');
+const popupLikes = popup.querySelector('.likes-count');
 
 
 const escPressHandler = function (evt) {
@@ -13,13 +19,17 @@ const escPressHandler = function (evt) {
   }
 };
 
-const renderFullview = function (pictureData) {
-  const currentPhoto = pictureData;
-  popup.querySelector('img').src = currentPhoto.url;
-  popup.querySelector('.social__caption').textContent = currentPhoto.description;
-  popup.querySelector('.likes-count').textContent = currentPhoto.likes;
+const closeButtonClickHandler = function () {
+  popupClose();
+};
 
-  let commentsCount = 5;
+const renderFullView = function (pictureData) {
+  const currentPhoto = pictureData;
+  popupImg.src = currentPhoto.url;
+  popupCaption.textContent = currentPhoto.description;
+  popupLikes.textContent = currentPhoto.likes;
+
+  let commentsCount = COMMENTS_COUNT_INIT;
   let startIndex = 0;
   const commentsBlock = popup.querySelector('.social__comments');
   commentsBlock.textContent = '';
@@ -28,7 +38,7 @@ const renderFullview = function (pictureData) {
   const showMoreComments = function () {
     if (currentPhoto.comments.length - commentsCount <= 0) {
       commentsCount = currentPhoto.comments.length;
-      comentsLoader.classList.add('hidden');
+      commentsLoader.classList.add('hidden');
     }
     if (commentsCount <= currentPhoto.comments.length) {
       for (let i = startIndex; i < commentsCount; i++) {
@@ -38,8 +48,8 @@ const renderFullview = function (pictureData) {
         commentAvatar.classList.add('social__picture');
         commentAvatar.src = currentPhoto.comments[i].avatar;
         commentAvatar.alt = currentPhoto.comments[i].name;
-        commentAvatar.width = 35;
-        commentAvatar.height = 35;
+        commentAvatar.width = IMAGE_SIDE_SIZE;
+        commentAvatar.height = IMAGE_SIDE_SIZE;
         const commentText = document.createElement('p');
         commentText.classList.add('social__text');
         commentText.textContent = currentPhoto.comments[i].message;
@@ -48,27 +58,24 @@ const renderFullview = function (pictureData) {
         commentItem.appendChild(commentText);
         commentsFragment.appendChild(commentItem);
         commentsBlock.appendChild(commentsFragment);
-        comentsCounter.textContent = `${commentsCount  } из ${  currentPhoto.comments.length  } комментариев`;
+        commentsCounter.textContent = `${commentsCount  } из ${  currentPhoto.comments.length  } комментариев`;
       }
-      startIndex += 5;
-      commentsCount += 5;
+      startIndex += COMMENTS_COUNT_INIT;
+      commentsCount += COMMENTS_COUNT_INIT;
     }
-    popup.addEventListener('close',  () => {
+    popup.addEventListener('close',() => {
       // eslint-disable-next-line no-use-before-define
-      comentsLoader.removeEventListener('click', commentsLoaderClickHandler);
+      commentsLoader.removeEventListener('click', commentsLoaderClickHandler);
     });
   };
   showMoreComments();
   const commentsLoaderClickHandler = function () {
     showMoreComments();
   };
-  comentsLoader.addEventListener('click', commentsLoaderClickHandler);
+  commentsLoader.addEventListener('click', commentsLoaderClickHandler);
   document.addEventListener('keydown', escPressHandler);
   popupOpen();
-  const closeButtonClickHandler = function () {
-    popupClose();
-  };
   closeButton.addEventListener('click', closeButtonClickHandler);
 
 };
-export {renderFullview, closeButton, escPressHandler, comentsLoader};
+export {renderFullView, closeButton, escPressHandler, commentsLoader, closeButtonClickHandler};

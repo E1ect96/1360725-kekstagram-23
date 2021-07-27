@@ -4,7 +4,7 @@ const filterMenu = document.querySelector('.img-filters');
 
 const setFilter = function (array, callback) {
   filterMenu.classList.remove('img-filters--inactive');
-  const FilterButtonClickHandler = (evt) => {
+  const filterButtonClickHandler = function (evt) {
     if (evt.target.matches('.img-filters__button')) {
       filterMenu.querySelector('.img-filters__button--active')
         .classList.remove('img-filters__button--active');
@@ -21,7 +21,7 @@ const setFilter = function (array, callback) {
       }
     }
   };
-  filterMenu.addEventListener('click', FilterButtonClickHandler);
+  filterMenu.addEventListener('click', filterButtonClickHandler);
 };
 
 export {setFilter};

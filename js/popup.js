@@ -1,7 +1,8 @@
-import {closeButton, escPressHandler} from './render-fullview.js';
+import {escPressHandler, closeButtonClickHandler} from './render-fullview.js';
 import {resetEffect} from './applying-filters.js';
 
 const popup = document.querySelector('.big-picture');
+const closeButton = popup.querySelector('#picture-cancel');
 const body = document.querySelector('body');
 const close = new Event('close');
 
@@ -13,11 +14,11 @@ const popupOpen = function () {
 const popupClose = function () {
   popup.classList.add('hidden');
   body.classList.remove('modal-open');
-  closeButton.removeEventListener('click', popupClose);
-  document.removeEventListener('keydown', escPressHandler);
   popup.querySelector('.social__comment-count').classList.remove('hidden');
   popup.querySelector('.comments-loader').classList.remove('hidden');
   popup.dispatchEvent(close);
+  document.removeEventListener('keydown', escPressHandler);
+  closeButton.removeEventListener('click', closeButtonClickHandler);
   resetEffect();
 };
 

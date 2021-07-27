@@ -110,9 +110,8 @@ uploadInput.addEventListener('change', uploadFormOpenHandler);
 
 const hashtagsValidateHandler = function () {
   const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
-  /*const enteredHashtags = textHashtags.value.split(' ');
-  * str = str.replace(/ +/g, ' ').trim();*/
-  const enteredHashtags = textHashtags.value.replace(/ +/g, ' ').trim().split(' ');
+  textHashtags.value = textHashtags.value.replace(/[\s{2,}]+/g, ' ');
+  const enteredHashtags = textHashtags.value.split(' ');
   const validHashtags = [];
   const errors = [];
 

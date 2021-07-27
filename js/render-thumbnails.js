@@ -1,4 +1,4 @@
-import {renderFullview} from'./render-fullview.js';
+import {renderFullView} from'./render-fullview.js';
 
 const renderThumbnails = function (picturesData) {
   const picturesBlock = document.querySelector('.pictures');
@@ -10,14 +10,13 @@ const renderThumbnails = function (picturesData) {
   allImages.forEach((image) => image.remove());
 
   picturesData.forEach((pictureData) => {
-    const {url, comments, likes, id} = pictureData;
+    const {url, comments, likes} = pictureData;
     const picture = newPictureTemplate.cloneNode(true);
     picture.querySelector('.picture__img').src = url;
     picture.querySelector('.picture__comments').textContent = comments.length;
     picture.querySelector('.picture__likes').textContent = likes;
-    picture.dataset.id = id;
     picture.addEventListener('click', () => {
-      renderFullview(pictureData);
+      renderFullView(pictureData);
     });
     fragmentThumbnail.appendChild(picture);
   });
