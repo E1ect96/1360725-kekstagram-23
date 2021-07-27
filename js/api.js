@@ -1,12 +1,16 @@
 import {showRenderError} from './show-render-error.js';
+import {renderThumbnails} from './render-thumbnails.js';
+import {setFilter} from './content-filter.js';
+import {debounce} from './utils/debounce.js';
 
 const URL = 'https://23.javascript.pages.academy/kekstagram';
 
-const getData = function (onSuccess) {
+const getData = function () {
   fetch(`${URL}/data`)
     .then((response) => response.json())
     .then((data) => {
-      onSuccess(data);
+      renderThumbnails(data);
+      setFilter(data, debounce(renderThumbnails));
     })
     .catch(() => {
       showRenderError();

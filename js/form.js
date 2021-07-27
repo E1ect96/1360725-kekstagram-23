@@ -6,6 +6,9 @@ import {formUploadError} from './form-upload-error.js';
 
 const MAX_HASHTAGS_COUNT = 5;
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const MIN_SCALE_VALUE = 25;
+const MAX_SCALE_VALUE = 100;
+const SCALE_STEP = 25;
 
 const photoUpload = document.querySelector('.img-upload__form');
 const uploadInput = photoUpload.querySelector('#upload-file');
@@ -20,7 +23,7 @@ const scaleUpControl = photoUpload.querySelector('.scale__control--bigger');
 const scaleControlValue = photoUpload.querySelector('.scale__control--value');
 const imgUploadPreview = photoUpload.querySelector('.img-upload__preview').children[0];
 
-let scaleValue = 100;
+let scaleValue = MAX_SCALE_VALUE;
 
 const resetInputValue = function () {
   uploadInput.value = '';
@@ -29,16 +32,16 @@ const resetInputValue = function () {
 };
 
 const scaleDownControlHandler = function () {
-  if (scaleControlValue.value > 25) {
-    scaleControlValue.value = parseInt(scaleControlValue.value, 10) - 25;
+  if (scaleControlValue.value > MIN_SCALE_VALUE) {
+    scaleControlValue.value = parseInt(scaleControlValue.value, 10) - SCALE_STEP;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
 };
 
 const scaleUpControlHandler = function () {
-  if (scaleControlValue.value < 100) {
-    scaleControlValue.value = parseInt(scaleControlValue.value, 10) + 25;
+  if (scaleControlValue.value < MAX_SCALE_VALUE) {
+    scaleControlValue.value = parseInt(scaleControlValue.value, 10) + SCALE_STEP;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
@@ -93,7 +96,7 @@ const uploadFormOpenHandler = function () {
   } else {
     formUploadError();
   }
-  scaleControlValue.value = 100;
+  scaleControlValue.value = MAX_SCALE_VALUE;
   scaleValue = 1;
   imgUploadPreview.style.transform = `scale(${scaleValue})`;
   scaleDownControl.addEventListener('click', scaleDownControlHandler);
@@ -107,7 +110,9 @@ uploadInput.addEventListener('change', uploadFormOpenHandler);
 
 const hashtagsValidateHandler = function () {
   const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
-  const enteredHashtags = textHashtags.value.split(' ');
+  /*const enteredHashtags = textHashtags.value.split(' ');
+  * str = str.replace(/ +/g, ' ').trim();*/
+  const enteredHashtags = textHashtags.value.replace(/ +/g, ' ').trim().split(' ');
   const validHashtags = [];
   const errors = [];
 

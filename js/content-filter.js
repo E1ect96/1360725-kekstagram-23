@@ -1,33 +1,27 @@
-const defaultFilter = document.querySelector('#filter-default');
-const randomFilter = document.querySelector('#filter-random');
-const discussedFilter = document.querySelector('#filter-discussed');
+import {getRandomImages, getSortedImages} from './utils.js';
 
-const changeActiveFilter = function (button) {
-  const activeFilter = document.querySelector('.img-filters__button--active');
+const filterMenu = document.querySelector('.img-filters');
 
-  activeFilter.classList.remove('img-filters__button--active');
-  button.classList.add('img-filters__button--active');
+const setFilter = function (array, callback) {
+  filterMenu.classList.remove('img-filters--inactive');
+  const FilterButtonClickHandler = (evt) => {
+    if (evt.target.matches('.img-filters__button')) {
+      filterMenu.querySelector('.img-filters__button--active')
+        .classList.remove('img-filters__button--active');
+      evt.target.classList.add('img-filters__button--active');
+      if (evt.target.matches('#filter-random')) {
+        const uniquePhotos = getRandomImages(array);
+        callback(uniquePhotos);
+      } else if (evt.target.matches('#filter-discussed')) {
+        const sortDiscussPhotos = getSortedImages(array);
+        callback(sortDiscussPhotos);
+      } else {
+        // По умолчанию
+        callback(array);
+      }
+    }
+  };
+  filterMenu.addEventListener('click', FilterButtonClickHandler);
 };
 
-const applyDefaultFilter = function (callback) {
-  defaultFilter.addEventListener('click', () => {
-    changeActiveFilter(defaultFilter);
-    callback();
-  });
-};
-
-const applyRandomFilter = function (callback) {
-  randomFilter.addEventListener('click', () => {
-    changeActiveFilter(randomFilter);
-    callback();
-  });
-};
-
-const applyDiscussedFilter = function (callback) {
-  discussedFilter.addEventListener('click', () => {
-    changeActiveFilter(discussedFilter);
-    callback();
-  });
-};
-
-export {applyDefaultFilter, applyRandomFilter, applyDiscussedFilter};
+export {setFilter};

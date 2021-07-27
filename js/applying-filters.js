@@ -28,7 +28,7 @@ const resetEffect = function () {
   effectNone.checked = true;
 };
 
-effects.addEventListener('click', (evt) => {
+const effectsClickHandler = function (evt) {
   effect = evt.target.value;
   effectLevel.classList.remove('hidden');
   imgUploadPreview.removeAttribute('class');
@@ -109,7 +109,9 @@ effects.addEventListener('click', (evt) => {
       resetEffect();
       break;
   }
-});
+};
+
+effects.addEventListener('click', effectsClickHandler);
 
 export {resetEffect};
 

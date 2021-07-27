@@ -4,7 +4,6 @@ const renderThumbnails = function (picturesData) {
   const picturesBlock = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture').content;
   const newPictureTemplate = pictureTemplate.querySelector('.picture');
-  const filterMenu = document.querySelector('.img-filters');
   const fragmentThumbnail = document.createDocumentFragment();
   const allImages = picturesBlock.querySelectorAll('a');
 
@@ -23,7 +22,6 @@ const renderThumbnails = function (picturesData) {
     fragmentThumbnail.appendChild(picture);
   });
   picturesBlock.appendChild(fragmentThumbnail);
-  filterMenu.classList.remove('img-filters--inactive');
 };
 export {renderThumbnails};
 
