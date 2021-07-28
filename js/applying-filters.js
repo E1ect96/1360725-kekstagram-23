@@ -20,15 +20,15 @@ noUiSlider.create(effectLevelSlider, {
 
 let effect = 'none';
 
-const resetEffect = function () {
+function resetEffect () {
   imgUploadPreview.style.removeProperty('filter');
   imgUploadPreview.removeAttribute('class');
   effectLevel.classList.add('hidden');
   effect = 'none';
   effectNone.checked = true;
-};
+}
 
-const effectsClickHandler = function (evt) {
+function effectsClickHandler (evt) {
   effect = evt.target.value;
   effectLevel.classList.remove('hidden');
   imgUploadPreview.removeAttribute('class');
@@ -109,7 +109,7 @@ const effectsClickHandler = function (evt) {
       resetEffect();
       break;
   }
-};
+}
 
 effects.addEventListener('click', effectsClickHandler);
 

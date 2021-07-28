@@ -25,60 +25,57 @@ const imgUploadPreview = photoUpload.querySelector('.img-upload__preview').child
 
 let scaleValue = MAX_SCALE_VALUE;
 
-const resetInputValue = function () {
+function resetInputValue () {
   uploadInput.value = '';
   textHashtags.value = '';
   textDescription.value = '';
-};
+}
 
-const scaleDownControlHandler = function () {
+function scaleDownControlHandler () {
   if (scaleControlValue.value > MIN_SCALE_VALUE) {
     scaleControlValue.value = parseInt(scaleControlValue.value, 10) - SCALE_STEP;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
-};
+}
 
-const scaleUpControlHandler = function () {
+function scaleUpControlHandler () {
   if (scaleControlValue.value < MAX_SCALE_VALUE) {
     scaleControlValue.value = parseInt(scaleControlValue.value, 10) + SCALE_STEP;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
-};
+}
 
-const formClose = function () {
+function formClose () {
   uploadForm.classList.add('hidden');
   body.classList.remove('modal-open');
   resetInputValue();
   resetEffect();
-  // eslint-disable-next-line no-use-before-define
   photoUpload.removeEventListener('submit', photoUploadSubmitHandler);
-  // eslint-disable-next-line no-use-before-define
   closeButton.removeEventListener('click', uploadFormCloseHandler);
-  // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', escPressHandler);
-};
+}
 
-const photoUploadSubmitHandler = function (evt) {
+function photoUploadSubmitHandler (evt) {
   evt.preventDefault();
   const formData = new FormData(evt.target);
   formClose();
   sendData(formUploadSuccess, formUploadError, formData);
-};
+}
 
-const uploadFormCloseHandler = function () {
+function uploadFormCloseHandler () {
   formClose();
-};
+}
 
-const escPressHandler = function (evt) {
+function escPressHandler (evt) {
   if (isEscEvent(evt) && !(document.activeElement === textHashtags || document.activeElement === textDescription)) {
     evt.preventDefault();
     uploadFormCloseHandler();
   }
-};
+}
 
-const uploadFormOpenHandler = function () {
+function uploadFormOpenHandler () {
   uploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
 
@@ -104,11 +101,11 @@ const uploadFormOpenHandler = function () {
   photoUpload.addEventListener('submit', photoUploadSubmitHandler);
   closeButton.addEventListener('click', uploadFormCloseHandler);
   document.addEventListener('keydown', escPressHandler);
-};
+}
 
 uploadInput.addEventListener('change', uploadFormOpenHandler);
 
-const hashtagsValidateHandler = function () {
+function hashtagsValidateHandler () {
   const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
   textHashtags.value = textHashtags.value.replace(/[\s{2,}]+/g, ' ');
   const enteredHashtags = textHashtags.value.split(' ');
@@ -134,7 +131,7 @@ const hashtagsValidateHandler = function () {
     textHashtags.setCustomValidity('');
   }
   textHashtags.reportValidity();
-};
+}
 
 textHashtags.addEventListener('input', hashtagsValidateHandler);
 

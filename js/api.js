@@ -5,7 +5,7 @@ import {debounce} from './utils/debounce.js';
 
 const URL = 'https://23.javascript.pages.academy/kekstagram';
 
-const getData = function () {
+function getData () {
   fetch(`${URL}/data`)
     .then((response) => response.json())
     .then((data) => {
@@ -15,9 +15,9 @@ const getData = function () {
     .catch(() => {
       showRenderError();
     });
-};
+}
 
-const sendData = function (onSuccess, onError, data) {
+function sendData (onSuccess, onError, data) {
   fetch( URL,
     {
       method: 'POST',
@@ -35,6 +35,6 @@ const sendData = function (onSuccess, onError, data) {
     .catch(() => {
       onError();
     });
-};
+}
 
 export {getData, sendData};

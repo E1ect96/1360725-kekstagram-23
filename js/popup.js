@@ -6,12 +6,12 @@ const closeButton = popup.querySelector('#picture-cancel');
 const body = document.querySelector('body');
 const close = new Event('close');
 
-const popupOpen = function () {
+function popupOpen () {
   popup.classList.remove('hidden');
   body.classList.add('modal-open');
-};
+}
 
-const popupClose = function () {
+function popupClose () {
   popup.classList.add('hidden');
   body.classList.remove('modal-open');
   popup.querySelector('.social__comment-count').classList.remove('hidden');
@@ -20,6 +20,6 @@ const popupClose = function () {
   document.removeEventListener('keydown', escPressHandler);
   closeButton.removeEventListener('click', closeButtonClickHandler);
   resetEffect();
-};
+}
 
 export {popupOpen, popupClose, popup, body};

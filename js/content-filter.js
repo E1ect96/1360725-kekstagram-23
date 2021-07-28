@@ -2,9 +2,9 @@ import {getRandomImages, getSortedImages} from './utils.js';
 
 const filterMenu = document.querySelector('.img-filters');
 
-const setFilter = function (array, callback) {
+function setFilter (array, callback) {
   filterMenu.classList.remove('img-filters--inactive');
-  const filterButtonClickHandler = function (evt) {
+  function filterButtonClickHandler (evt) {
     if (evt.target.matches('.img-filters__button')) {
       filterMenu.querySelector('.img-filters__button--active')
         .classList.remove('img-filters__button--active');
@@ -20,8 +20,8 @@ const setFilter = function (array, callback) {
         callback(array);
       }
     }
-  };
+  }
   filterMenu.addEventListener('click', filterButtonClickHandler);
-};
+}
 
 export {setFilter};

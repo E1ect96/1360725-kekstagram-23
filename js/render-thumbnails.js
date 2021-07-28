@@ -1,6 +1,6 @@
 import {renderFullView} from'./render-fullview.js';
 
-const renderThumbnails = function (picturesData) {
+function renderThumbnails (picturesData) {
   const picturesBlock = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture').content;
   const newPictureTemplate = pictureTemplate.querySelector('.picture');
@@ -21,7 +21,7 @@ const renderThumbnails = function (picturesData) {
     fragmentThumbnail.appendChild(picture);
   });
   picturesBlock.appendChild(fragmentThumbnail);
-};
+}
 export {renderThumbnails};
 
 

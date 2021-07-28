@@ -2,7 +2,7 @@ import {body} from './popup.js';
 
 const template = document.querySelector('#render-error').content;
 
-const showRenderError = function () {
+function showRenderError () {
   const errorModal = template.cloneNode(true).querySelector('.error');
   body.appendChild(errorModal);
   body.classList.add('modal-open');
@@ -11,6 +11,6 @@ const showRenderError = function () {
     body.removeChild(errorModal);
     body.classList.remove('modal-open');
   });
-};
+}
 
 export {showRenderError};

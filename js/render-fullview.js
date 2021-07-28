@@ -12,18 +12,18 @@ const popupCaption = popup.querySelector('.social__caption');
 const popupLikes = popup.querySelector('.likes-count');
 
 
-const escPressHandler = function (evt) {
+function escPressHandler (evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     popupClose();
   }
-};
+}
 
-const closeButtonClickHandler = function () {
+function closeButtonClickHandler () {
   popupClose();
-};
+}
 
-const renderFullView = function (pictureData) {
+function renderFullView (pictureData) {
   const currentPhoto = pictureData;
   popupImg.src = currentPhoto.url;
   popupCaption.textContent = currentPhoto.description;
@@ -35,7 +35,7 @@ const renderFullView = function (pictureData) {
   commentsBlock.textContent = '';
   const commentsFragment = new DocumentFragment();
 
-  const showMoreComments = function () {
+  function showMoreComments () {
     if (currentPhoto.comments.length - commentsCount <= 0) {
       commentsCount = currentPhoto.comments.length;
       commentsLoader.classList.add('hidden');
@@ -67,15 +67,15 @@ const renderFullView = function (pictureData) {
       // eslint-disable-next-line no-use-before-define
       commentsLoader.removeEventListener('click', commentsLoaderClickHandler);
     });
-  };
+  }
   showMoreComments();
-  const commentsLoaderClickHandler = function () {
+  function commentsLoaderClickHandler () {
     showMoreComments();
-  };
+  }
   commentsLoader.addEventListener('click', commentsLoaderClickHandler);
   document.addEventListener('keydown', escPressHandler);
   popupOpen();
   closeButton.addEventListener('click', closeButtonClickHandler);
 
-};
+}
 export {renderFullView, closeButton, escPressHandler, commentsLoader, closeButtonClickHandler};

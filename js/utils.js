@@ -1,10 +1,10 @@
 const RANDOM_IMAGES_COUNT = 10;
 
-const isEscEvent = function (evt){
+function isEscEvent  (evt){
   return (evt.key === 'Escape' || evt.key === 'Esc');
-};
+}
 
-const getUniqImages = function (images) {
+function getUniqImages (images) {
   const ids = [];
   const results = [];
   images.forEach( (image, index) => {
@@ -18,9 +18,9 @@ const getUniqImages = function (images) {
   });
 
   return results;
-};
+}
 
-const getRandomImages = function (array) {
+function getRandomImages (array) {
   const results = [];
 
   for (let count = 0; count < array.length; count++) {
@@ -31,10 +31,10 @@ const getRandomImages = function (array) {
   }
 
   return getUniqImages(results).slice(0, RANDOM_IMAGES_COUNT);
-};
+}
 
-const getSortedImages = function (images) {
+function getSortedImages (images) {
   return images.slice().sort((first, second) => second.comments.length - first.comments.length);
-};
+}
 
 export {getRandomImages, getSortedImages, isEscEvent};
