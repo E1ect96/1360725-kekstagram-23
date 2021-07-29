@@ -64,15 +64,14 @@ const renderFullView = (pictureData) => {
       commentsCount += COMMENTS_COUNT_INIT;
     }
     popup.addEventListener('close',() => {
-      // eslint-disable-next-line no-use-before-define
       commentsLoader.removeEventListener('click', commentsLoaderClickHandler);
     });
   };
   showMoreComments();
-
-  const commentsLoaderClickHandler = () => {
+  //Использование FD для использования механизма "поднятия"
+  function commentsLoaderClickHandler () {
     showMoreComments();
-  };
+  }
   commentsLoader.addEventListener('click', commentsLoaderClickHandler);
   document.addEventListener('keydown', escPressHandler);
   popupOpen();
