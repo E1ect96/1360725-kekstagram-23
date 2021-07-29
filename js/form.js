@@ -52,28 +52,31 @@ const formClose = () => {
   body.classList.remove('modal-open');
   resetInputValue();
   resetEffect();
+  // eslint-disable-next-line no-use-before-define
   photoUpload.removeEventListener('submit', photoUploadSubmitHandler);
+  // eslint-disable-next-line no-use-before-define
   closeButton.removeEventListener('click', uploadFormCloseHandler);
+  // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', escPressHandler);
 };
-//Используем function declaration для срабатывания hoisting
-function photoUploadSubmitHandler (evt) {
+
+const photoUploadSubmitHandler = (evt) => {
   evt.preventDefault();
   const formData = new FormData(evt.target);
   formClose();
   sendData(formUploadSuccess, formUploadError, formData);
-}
-//Используем function declaration для срабатывания hoisting
-function uploadFormCloseHandler () {
+};
+
+const uploadFormCloseHandler = () => {
   formClose();
-}
-//Используем function declaration для срабатывания hoisting
-function escPressHandler (evt) {
+};
+
+const escPressHandler = (evt) => {
   if (isEscEvent(evt) && !(document.activeElement === textHashtags || document.activeElement === textDescription)) {
     evt.preventDefault();
     uploadFormCloseHandler();
   }
-}
+};
 
 const uploadFormOpenHandler = () => {
   uploadForm.classList.remove('hidden');
