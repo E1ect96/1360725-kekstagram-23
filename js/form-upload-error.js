@@ -3,7 +3,7 @@ import {body} from './popup.js';
 const template = document.querySelector('#error').content;
 const uploadErrorModal = template.cloneNode(true).querySelector('.error');
 
-function formUploadError () {
+const formUploadError = () => {
   body.appendChild(uploadErrorModal);
   body.classList.add('modal-open');
   const closeButton =  uploadErrorModal.querySelector('.error__button');
@@ -11,6 +11,6 @@ function formUploadError () {
     body.removeChild(uploadErrorModal);
     body.classList.remove('modal-open');
   });
-}
+};
 
 export {formUploadError};

@@ -12,18 +12,18 @@ const popupCaption = popup.querySelector('.social__caption');
 const popupLikes = popup.querySelector('.likes-count');
 
 
-function escPressHandler (evt) {
+const escPressHandler = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     popupClose();
   }
-}
+};
 
-function closeButtonClickHandler () {
+const closeButtonClickHandler = () => {
   popupClose();
-}
+};
 
-function renderFullView (pictureData) {
+const renderFullView = (pictureData) => {
   const currentPhoto = pictureData;
   popupImg.src = currentPhoto.url;
   popupCaption.textContent = currentPhoto.description;
@@ -35,7 +35,7 @@ function renderFullView (pictureData) {
   commentsBlock.textContent = '';
   const commentsFragment = new DocumentFragment();
 
-  function showMoreComments () {
+  const showMoreComments = () => {
     if (currentPhoto.comments.length - commentsCount <= 0) {
       commentsCount = currentPhoto.comments.length;
       commentsLoader.classList.add('hidden');
@@ -66,8 +66,9 @@ function renderFullView (pictureData) {
     popup.addEventListener('close',() => {
       commentsLoader.removeEventListener('click', commentsLoaderClickHandler);
     });
-  }
+  };
   showMoreComments();
+  //Используем function declaration для срабатывания hoisting
   function commentsLoaderClickHandler () {
     showMoreComments();
   }
@@ -76,5 +77,5 @@ function renderFullView (pictureData) {
   popupOpen();
   closeButton.addEventListener('click', closeButtonClickHandler);
 
-}
+};
 export {renderFullView, closeButton, escPressHandler, commentsLoader, closeButtonClickHandler};

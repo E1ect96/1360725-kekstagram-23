@@ -25,29 +25,29 @@ const imgUploadPreview = photoUpload.querySelector('.img-upload__preview').child
 
 let scaleValue = MAX_SCALE_VALUE;
 
-function resetInputValue () {
+const resetInputValue = () => {
   uploadInput.value = '';
   textHashtags.value = '';
   textDescription.value = '';
-}
+};
 
-function scaleDownControlHandler () {
+const scaleDownControlHandler = () => {
   if (scaleControlValue.value > MIN_SCALE_VALUE) {
     scaleControlValue.value = parseInt(scaleControlValue.value, 10) - SCALE_STEP;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
-}
+};
 
-function scaleUpControlHandler () {
+const scaleUpControlHandler = () => {
   if (scaleControlValue.value < MAX_SCALE_VALUE) {
     scaleControlValue.value = parseInt(scaleControlValue.value, 10) + SCALE_STEP;
     scaleValue = scaleControlValue.value / 100;
     imgUploadPreview.style.transform = `scale(${scaleValue})`;
   }
-}
+};
 
-function formClose () {
+const formClose = () => {
   uploadForm.classList.add('hidden');
   body.classList.remove('modal-open');
   resetInputValue();
@@ -55,19 +55,19 @@ function formClose () {
   photoUpload.removeEventListener('submit', photoUploadSubmitHandler);
   closeButton.removeEventListener('click', uploadFormCloseHandler);
   document.removeEventListener('keydown', escPressHandler);
-}
-
+};
+//Используем function declaration для срабатывания hoisting
 function photoUploadSubmitHandler (evt) {
   evt.preventDefault();
   const formData = new FormData(evt.target);
   formClose();
   sendData(formUploadSuccess, formUploadError, formData);
 }
-
+//Используем function declaration для срабатывания hoisting
 function uploadFormCloseHandler () {
   formClose();
 }
-
+//Используем function declaration для срабатывания hoisting
 function escPressHandler (evt) {
   if (isEscEvent(evt) && !(document.activeElement === textHashtags || document.activeElement === textDescription)) {
     evt.preventDefault();
@@ -75,7 +75,7 @@ function escPressHandler (evt) {
   }
 }
 
-function uploadFormOpenHandler () {
+const uploadFormOpenHandler = () => {
   uploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
 
@@ -101,11 +101,11 @@ function uploadFormOpenHandler () {
   photoUpload.addEventListener('submit', photoUploadSubmitHandler);
   closeButton.addEventListener('click', uploadFormCloseHandler);
   document.addEventListener('keydown', escPressHandler);
-}
+};
 
 uploadInput.addEventListener('change', uploadFormOpenHandler);
 
-function hashtagsValidateHandler () {
+const hashtagsValidateHandler = () => {
   const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
   textHashtags.value = textHashtags.value.replace(/[\s{2,}]+/g, ' ');
   const enteredHashtags = textHashtags.value.split(' ');
@@ -131,7 +131,7 @@ function hashtagsValidateHandler () {
     textHashtags.setCustomValidity('');
   }
   textHashtags.reportValidity();
-}
+};
 
 textHashtags.addEventListener('input', hashtagsValidateHandler);
 
